@@ -1,0 +1,164 @@
+ARSITEKTUR PROJECT: kesmas_new
+======================================================
+Framework   : CodeIgniter 3
+Frontend    : Bootstrap 5
+Architecture: MVC dengan Sub-Directory
+======================================================
+
+1. STRUKTUR URL DAN AKSES (ROUTING)
+------------------------------------------------------
+A. Publik (Pengguna Umum)
+- URL       : localhost/kesmas_new/
+- Controller: C:\laragon\www\kesmas_new\application\controllers\Public_pendaftaran.php
+- View      : C:\laragon\www\kesmas_new\application\views\public\ (Gunakan sub-folder 'public')
+
+B. Login Sistem
+- URL       : localhost/kesmas_new/petugaslogin
+- Controller: C:\laragon\www\kesmas_new\application\controllers\Auth.php
+- View      : C:\laragon\www\kesmas_new\application\views\auth\ (Gunakan sub-folder 'auth')
+
+C. Modul Klinik (Petugas Klinik)
+- URL       : localhost/kesmas_new/klinik/petugas_klinik
+- Controller: C:\laragon\www\kesmas_new\application\controllers\klinik\Petugas_klinik.php
+- View      : C:\laragon\www\kesmas_new\application\views\klinik\ (Gunakan sub-folder 'klinik')
+
+D. Modul Kesmas (Petugas Kesmas)
+- URL       : localhost/kesmas_new/kesmas/form_permintaan_kesmas
+- Controller: C:\laragon\www\kesmas_new\application\controllers\kesmas\Form_permintaan_kesmas.php
+- View      : C:\laragon\www\kesmas_new\application\views\kesmas\ (Gunakan sub-folder 'kesmas')
+
+
+2. STRUKTUR DIREKTORI (MVC)
+------------------------------------------------------
+Disarankan menggunakan sub-folder di dalam Controllers, Models, dan Views untuk memisahkan logika setiap modul.
+
+A. Controllers (\application\controllers\)
+   - Auth.php                (Controller Login Utama kesmas)
+   - /klinik/                (Sub-folder untuk modul Klinik)
+      -- Auth.php            (Controller Login Utama klinik)
+      -- Dashboard.php       (Controller untuk halaman sesudah login klinik)
+      -- Form_permintaan_rm.php (Controller untuk halaman Data Identitas Pasien Klinik (rekam_medis))
+      -- Laporan_uji_klinik.php (Controller untuk halaman laporan klinik)
+      -- Uji_klinik.php         (Controller untuk halaman input hasil uji laboratorium klinik)
+      -- Uji_rekam_medis.php    (Controller untuk data halaman kunjungan pasien(rekam_medis))
+      -- Form_permintaan_klinik.php  (Controller untuk data permintaan pemeriksaan klinik)
+      -- Petugas_sampel.php          (Controller untuk data halaman petugas sampel klinik)
+      -- Petugas_verifikasi.php      (Controller untuk data halaman petugas_validasi klinik)
+      -- Petugas_validasi.php        (Controller untuk data halaman petugas_validasi klinik)
+      -- Verifikator.php             (Controller untuk data halaman verifikator klinik)
+      -- penanggung_teknis.php       (Controller untuk data halaman penanggung jawab teknis klinik)
+      -- petugas_dokter.php          (Controller untuk data halaman petugas_dokter klinik)
+      
+
+B. Models (\application\models\)
+   - /klinik/                       (Sub-folder model Klinik)
+      -- User_model.php             (Model untuk login klinik)
+      -- Dashboard_model.php        (Model untuk dashboard klinik)
+      -- Form_permintaan_rm_model.php (Model untuk Data Identitas Pasien Klinik (rekam_medis))
+      -- Laporan_uji_klinik_model.php (Model untuk halaman laporan klinik)
+      -- Uji_klinik_model.php      (Model untuk halaman input hasil uji laboratorium klinik)
+      -- Kunjungan_rm_model.php    (Model untuk data halaman kunjungan pasien (rekam_medis))
+      -- puskesmas_wilayah_model.php       (Model untuk puskesmas wilayah klinik (rekam_medis))
+      -- Form_permintaan_klinik_model.php  (Model untuk data permintaan pemeriksaan klinik)
+      -- Petugas_verifikasi_model.php      (Model untuk data halaman petugas_validasi klinik)
+      -- Petugas_validasi_model.php        (Model untuk data petugas validasi klinik)
+      -- Petugas_sample_model.php          (Model untuk data petugas sampel klinik)
+      -- Verifikator_model.php             (Model untuk data halaman verifikator klinik)
+      -- Penanggung_teknis_model.php       (Model untuk data halaman penanggung jawab teknis klinik)
+      -- petugas_dokter_model.php          (Model untuk data halaman petugas_dokter klinik)
+
+      
+
+C. Views (\application\views\)
+   - /templates/             (Sub-folder untuk elemen berulang Bootstrap 5)
+      -- header.php          (Load CSS/Bootstrap 5)
+      -- footer.php          (Load JS/jQuery)
+      -- sidebar.php
+   - /public/                (Folder halaman publik pendaftaran)
+   - /auth/                  (Folder halaman form login kesmas)
+   - /klinik/                
+      -- /auth/              
+         -- login.php              (tampilan login klinik)
+      -- /dashboard_klinik/         
+         -- dashboard.php               (tampilan dashboard klinik)
+         -- Dashboard_dokter.php        (tampilan dashboard petugas rm)
+         -- Dashboard_klinik.php        (tampilan dashboard pemeriksa sampel)
+         -- Dashboard_pendaftaran.php   (tampilan dashboard petugas pendaftaran)
+      -- /layout/
+         -- sidebar.php                 (sidebar klinik)
+         -- header.php                  (header klinik)
+         -- footer.php                  (footer klinik)
+      -- /Uji_klinik/
+         -- edit.php                    (Edit Data Hasil Uji Laboratorium klinik)
+         -- index.php                   (Tampilan Data Hasil Uji Laboratorium klinik)
+         -- form.php                    (Tambah Data Hasil Uji Laboratorium klinik)
+      -- /Form_permintaan_rm/
+         -- index.php                   (tampilan halaman utama klinik (rekam_medis))
+         -- detail.php                  (tampilan halaman Detail Identitas Pasien klinik (rekam_medis))
+         -- form.php                    (tampilan halaman tambah & edit pasien klinik (rekam_medis))
+      -- /Uji_rekam_medis/                  (kunjungan pasien SOAP klinik (rekam_medis))
+         -- detail.php                    (tampilan halaman Detail kunjungan pasien klinik (rekam_medis))
+         -- index.php                     (tampilan halaman utama kunjungan pasien klinik (rekam_medis))
+         -- lihat_soap.php                (tampilan halaman lihat soap klinik (rekam_medis))
+         -- print_soap_pdf.php            (tampilan halaman print soap ke pdf klinik (rekam_medis))
+         -- print_soap.php                (tampilan halaman print soap klinik (rekam_medis))
+      -- /kunjungan_rekam_medis/
+         -- soap.php                     (Tampilan halaman Input Hasil SOAP klinik (rekam_medis)())
+      -- /Form_permintaan_klinik/
+         -- detail.php                   (tampilan setelah mengisi formulir permintaan pemeriksaan klinik)
+         -- form.php                     (tampilan untuk FORMULIR PERMINTAAN PEMERIKSAAN LABORATORIUM KLINIK)
+         -- index.php                    (tampilan halaman Detail pendaftaran Pasien klinik)
+         -- model_input_hasil.php        ()
+         -- print.php                    (tampilan untuk cetak file PDF hasil pemeriksaan)
+      -- /user/
+         -- edit.php                     (tampilan untuk edit user di klinik)
+         -- form.php                     (tampilan untuk tambah user di klinik)
+         -- index.php                    (tampilan halaman utama user di klinik)
+      -- /petugas_sampel/
+         -- form.php                     (tampilan untuk tambah petugas sampel di klinik)
+         -- index.php                    (tampilan halaman utama petugas sampel di klinik)
+      -- /petugas_verifikasi/
+         -- form.php                     (tampilan untuk tambah petugas verifikasi di klinik)
+         -- index.php                    (tampilan halaman utama petugas verifikasi di klinik)
+      -- /laporan_uji_klinik/
+         -- index.php                    (tampilan halaman utama laporan klinik)
+         -- detail.php                   (tampilan halaman lihat hasil laporan pasien klinik)
+         -- print.php                    (tampilan untuk cetak file PDF hasil pemeriksaan)
+      -- /petugas_validasi/
+         -- form.php                     (tampilan untuk tambah petugas validasi di klinik)
+         -- index.php                    (tampilan halaman utama petugas validasi di klinik)
+      -- /verifikator/
+         -- form.php                     (tampilan untuk tambah verifikator di klinik)
+         -- index.php                    (tampilan halaman utama verifikator di klinik)
+      -- /penanggung_teknis/
+         -- form.php                     (tampilan untuk tambah penanggung jawab teknis di klinik)
+         -- index.php                    (tampilan halaman utama penanggung jawab teknis di klinik)
+      -- /petugas_rekam_medis/
+         -- create.php                   (tampilan untuk tambah dokter di klinik)
+         -- edit.php                     (tampilan untuk edit dokter di klinik)
+         -- index.php                    (tampilan halaman utama dokter di klinik) 
+        
+         
+
+
+
+      
+
+   
+
+D. Assets (\assets\) -> C:\laragon\www\kesmas_new\assets\
+   - /css/                   (File style kustom, bootstrap.min.css lokal)
+      -- dashboard.css       (css tampilan dashboard klinik)
+      -- login.css           (css tampilan login klinik)
+   - /js/                    (File script kustom, bootstrap.bundle.min.js, jquery.min.js)
+   - /img/                   (Gambar, logo aplikasi, icon)
+   - /plugins/               (Library tambahan seperti DataTables, Select2)
+
+
+3. PANDUAN PENGEMBANGAN (Berdasarkan Rules)
+------------------------------------------------------
+- Standard File  : Selalu tambahkan baris `defined('BASEPATH') OR exit('No direct script access allowed');` di atas file Controller/Model baru.
+- Keamanan DB    : Wajib menggunakan Query Builder CI3 (contoh: `$this->db->insert()`, `$this->db->where()`) untuk menghindari SQL Injection.
+- Input & XSS    : Gunakan fitur `form_validation` dan filter `xss_clean` saat menerima input dari user. Pada view gunakan `html_escape()` saat menampilkan data rawan.
+- Frontend UI    : Desain wajib responsif di semua devais (mobile, tablet, desktop) menggunakan sistem Grid Bootstrap 5. Jangan gunakan struktur tabel untuk layout tampilan, gunakan div flex/grid.
+- Interaksi      : Gunakan jQuery AJAX untuk memproses data dari sisi client tanpa harus me-reload halaman sepenuhnya. Logika Controller menangkap request via `$this->input->is_ajax_request()`.

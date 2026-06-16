@@ -1,0 +1,85 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Form_permintaan_rm_model extends CI_Model
+{
+
+    protected $table = 'pasien';
+
+    public function get_all()
+    {
+        return $this->db->order_by('nik', 'DESC')->get($this->table)->result();
+    }
+
+    public function get_today()
+    {
+        $today = date('Y-m-d');
+        $this->db->where("DATE(created_at) = '$today' OR DATE(updated_at) = '$today'");
+        return $this->db->order_by('nik', 'DESC')->get($this->table)->result();
+    }
+
+    public function get_patients_visiting_today()
+    {
+        $today = date('Y-m-d');
+        $sql = "SELECT DISTINCT pasien.* 
+                FROM pasien 
+                LEFT JOIN form_permintaan_klinik ON form_permintaan_klinik.id_pasien = pasien.id_pasien 
+                LEFT JOIN kunjungan_rm ON kunjungan_rm.no_rm = pasien.no_rm
+                WHERE DATE(pasien.created_at) = ? 
+                   OR DATE(pasien.updated_at) = ? 
+                   OR DATE(form_permintaan_klinik.tgl_form) = ? 
+                   OR DATE(kunjungan_rm.tanggal_kunjungan) = ?";
+        return $this->db->query($sql, [$today, $today, $today, $today])->result();
+    }
+
+    public function get_by_nik($id_pasien)
+    {
+        return $this->db->get_where($this->table, ['id_pasien' => $id_pasien])->row();
+    }
+
+    public function get_by_no_rm($no_rm)
+    {
+        return $this->db->order_by('nik', 'DESC')->get_where($this->table, ['no_rm' => $no_rm])->row();
+    }
+
+    public function get_by_id($id)
+    {
+        return $this->db->get_where($this->table, ['id_pasien' => $id])->row();
+    }
+
+    public function insert($data)
+    {
+        $this->db->insert($this->table, $data);
+        return $this->db->insert_id();
+    }
+
+    public function update($id, $data)
+    {
+        $this->db->where('nik', $id);
+        $this->db->update($this->table, $data);
+    }
+
+    public function delete($id)
+    {
+        $this->db->where('nik', $id);
+        $this->db->delete($this->table);
+    }
+
+    // Fungsi untuk membuat nomor Rekam Medis (RM) otomatis
+    public function generate_no_rm()
+    {
+        $this->db->select_max('no_rm');
+        $query = $this->db->get($this->table);
+        $result = $query->row();
+
+        $last_no = $result->no_rm;
+
+        if ($last_no && preg_match('/RM-(\d+)/', $last_no, $match)) {
+            $last_number = (int) $match[1] + 1;
+        } else {
+            $last_number = 1;
+        }
+
+        return 'RM-' . str_pad($last_number, 4, '0', STR_PAD_LEFT);
+    }
+}
