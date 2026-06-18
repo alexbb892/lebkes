@@ -39,37 +39,37 @@
         <?php if ($is_admin || $is_pendaftaran || $is_pemeriksa): ?>
           <li class="nav-header">Klinik dan Rekam Medis</li>
           <li class="nav-item">
-            <a class="nav-link <?= in_array($this->uri->segment(1), ['form_permintaan_klinik', 'uji_klinik', 'uji_rekam_klinik', 'laporan_uji_klinik']) ? 'active' : 'collapsed' ?>" data-bs-toggle="collapse" href="#collapseKlinik" role="button" aria-expanded="<?= in_array($this->uri->segment(1), ['form_permintaan_klinik', 'uji_klinik', 'uji_rekam_klinik', 'laporan_uji_klinik']) ? 'true' : 'false' ?>">
+            <a class="nav-link <?= in_array($this->uri->segment(2), ['form_permintaan_klinik', 'uji_klinik', 'uji_rekam_klinik', 'laporan_uji_klinik']) ? 'active' : 'collapsed' ?>" data-bs-toggle="collapse" href="#collapseKlinik" role="button" aria-expanded="<?= in_array($this->uri->segment(2), ['form_permintaan_klinik', 'uji_klinik', 'uji_rekam_klinik', 'laporan_uji_klinik']) ? 'true' : 'false' ?>">
               <i class="nav-icon fas fa-clinic-medical text-success"></i>
               <span>Klinik</span>
               <i class="fas fa-chevron-down arrow-icon"></i>
             </a>
-            <div class="collapse <?= in_array($this->uri->segment(1), ['form_permintaan_klinik', 'uji_klinik', 'uji_rekam_klinik', 'laporan_uji_klinik']) ? 'show' : '' ?>" id="collapseKlinik" data-bs-parent="#sidebarMenu">
+            <div class="collapse <?= in_array($this->uri->segment(2), ['form_permintaan_klinik', 'uji_klinik', 'uji_rekam_klinik', 'laporan_uji_klinik']) ? 'show' : '' ?>" id="collapseKlinik" data-bs-parent="#sidebarMenu">
               <ul class="nav flex-column ms-3 mt-1">
                 <?php if ($is_admin || $is_pendaftaran): ?>
                 <li class="nav-item">
-                  <a href="<?= site_url('klinik/form_permintaan_klinik') ?>" class="nav-link <?= $this->uri->segment(1) == 'form_permintaan_klinik' ? 'active' : '' ?>">
+                  <a href="<?= site_url('klinik/form_permintaan_klinik') ?>" class="nav-link <?= $this->uri->segment(2) == 'form_permintaan_klinik' ? 'active' : '' ?>">
                     <i class="nav-icon far fa-circle" style="font-size: 0.5rem;"></i> Form Pendaftaran Klinik
                   </a>
                 </li>
                 <?php endif; ?>
                 <?php if ($is_admin || $is_pemeriksa): ?>
                 <li class="nav-item">
-                  <a href="<?= site_url('klinik/uji_klinik') ?>" class="nav-link <?= $this->uri->segment(1) == 'uji_klinik' ? 'active' : '' ?>">
+                  <a href="<?= site_url('klinik/uji_klinik') ?>" class="nav-link <?= $this->uri->segment(2) == 'uji_klinik' ? 'active' : '' ?>">
                     <i class="nav-icon far fa-circle" style="font-size: 0.5rem;"></i> Uji Lab Klinik
                   </a>
                 </li>
                 <?php endif; ?>
                 <?php if ($is_admin || $is_pemeriksa || $is_rm): ?>
                 <li class="nav-item">
-                  <a href="<?= site_url('klinik/uji_rekam_klinik') ?>" class="nav-link <?= $this->uri->segment(1) == 'uji_rekam_klinik' ? 'active' : '' ?>">
+                  <a href="<?= site_url('klinik/uji_rekam_klinik') ?>" class="nav-link <?= $this->uri->segment(2) == 'uji_rekam_klinik' ? 'active' : '' ?>">
                     <i class="nav-icon far fa-circle" style="font-size: 0.5rem;"></i> Detail Rekam Klinik
                   </a>
                 </li>
                 <?php endif; ?>
                 <?php if ($is_admin || $is_pendaftaran || $is_pemeriksa): ?>
                 <li class="nav-item">
-                  <a href="<?= site_url('klinik/laporan_uji_klinik') ?>" class="nav-link <?= $this->uri->segment(1) == 'laporan_uji_klinik' ? 'active' : '' ?>">
+                  <a href="<?= site_url('klinik/laporan_uji_klinik') ?>" class="nav-link <?= $this->uri->segment(2) == 'laporan_uji_klinik' ? 'active' : '' ?>">
                     <i class="nav-icon far fa-circle" style="font-size: 0.5rem;"></i> Laporan Uji Lab
                   </a>
                 </li>
@@ -81,26 +81,26 @@
 
         <?php if ($is_admin || $is_pendaftaran || $is_rm): ?>
           <li class="nav-item">
-            <a class="nav-link <?= in_array($this->uri->segment(1), ['form_permintaan_rm', 'uji_rekam_medis', 'hasil_laporan']) ? 'active' : 'collapsed' ?>" data-bs-toggle="collapse" href="#collapseRM" role="button" aria-expanded="<?= in_array($this->uri->segment(1), ['form_permintaan_rm', 'uji_rekam_medis', 'hasil_laporan']) ? 'true' : 'false' ?>">
+            <a class="nav-link <?= in_array($this->uri->segment(2), ['form_permintaan_rm', 'uji_rekam_medis', 'hasil_laporan']) ? 'active' : 'collapsed' ?>" data-bs-toggle="collapse" href="#collapseRM" role="button" aria-expanded="<?= in_array($this->uri->segment(2), ['form_permintaan_rm', 'uji_rekam_medis', 'hasil_laporan']) ? 'true' : 'false' ?>">
               <i class="nav-icon fas fa-notes-medical text-danger"></i>
               <span>Rekam Medis</span>
               <i class="fas fa-chevron-down arrow-icon"></i>
             </a>
-            <div class="collapse <?= in_array($this->uri->segment(1), ['form_permintaan_rm', 'uji_rekam_medis', 'hasil_laporan']) ? 'show' : '' ?>" id="collapseRM" data-bs-parent="#sidebarMenu">
+            <div class="collapse <?= in_array($this->uri->segment(2), ['form_permintaan_rm', 'uji_rekam_medis', 'hasil_laporan']) ? 'show' : '' ?>" id="collapseRM" data-bs-parent="#sidebarMenu">
               <ul class="nav flex-column ms-3 mt-1">
                 <li class="nav-item">
-                  <a href="<?= site_url('klinik/form_permintaan_rm') ?>" class="nav-link <?= $this->uri->segment(1) == 'form_permintaan_rm' ? 'active' : '' ?>">
+                  <a href="<?= site_url('klinik/form_permintaan_rm') ?>" class="nav-link <?= $this->uri->segment(2) == 'form_permintaan_rm' ? 'active' : '' ?>">
                     <i class="nav-icon far fa-circle" style="font-size: 0.5rem;"></i> Pendaftaran Pasien RM 
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="<?= site_url('klinik/uji_rekam_medis') ?>" class="nav-link <?= $this->uri->segment(1) == 'uji_rekam_medis' ? 'active' : '' ?>">
+                  <a href="<?= site_url('klinik/uji_rekam_medis') ?>" class="nav-link <?= $this->uri->segment(2) == 'uji_rekam_medis' ? 'active' : '' ?>">
                     <i class="nav-icon far fa-circle" style="font-size: 0.5rem;"></i> Detail Kunjungan
                   </a>
                 </li>
                 <!-- <?php if ($is_admin || $is_rm): ?>
                 <li class="nav-item">
-                  <a href="<?= site_url('klinik/hasil_laporan') ?>" class="nav-link <?= $this->uri->segment(1) == 'hasil_laporan' ? 'active' : '' ?>">
+                  <a href="<?= site_url('klinik/hasil_laporan') ?>" class="nav-link <?= $this->uri->segment(2) == 'hasil_laporan' ? 'active' : '' ?>">
                     <i class="nav-icon far fa-circle" style="font-size: 0.5rem;"></i> Laporan Hasil Lab & SOAP
                   </a>
                 </li>
@@ -113,7 +113,7 @@
         <?php if ($is_admin || $is_rm): ?>
           <li class="nav-header">Laporan Akhir</li>
           <li class="nav-item">
-            <a href="<?= site_url('klinik/form_laporan_akhir') ?>" class="nav-link <?= $this->uri->segment(1) == 'form_laporan_akhir' ? 'active' : '' ?>">
+            <a href="<?= site_url('klinik/form_laporan_akhir') ?>" class="nav-link <?= $this->uri->segment(2) == 'form_laporan_akhir' ? 'active' : '' ?>">
               <i class="nav-icon far fa-file-alt text-info"></i>
               <span>Form Laporan Akhir</span>
             </a>
@@ -123,26 +123,26 @@
         <?php if ($is_admin): ?>
           <li class="nav-header">Sistem</li>
           <li class="nav-item">
-            <a href="<?= site_url('klinik/user') ?>" class="nav-link <?= $this->uri->segment(1) == 'user' ? 'active' : '' ?>">
+            <a href="<?= site_url('klinik/user') ?>" class="nav-link <?= $this->uri->segment(2) == 'user' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-users-cog text-warning"></i>
               <span>Manajemen Akun User</span>
             </a>
           </li>
           <!-- Simplification for management links -->
           <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-toggle="collapse" href="#collapseManajemen" role="button" aria-expanded="false">
+            <a class="nav-link <?= in_array($this->uri->segment(2), ['petugas_sampel', 'petugas_verifikasi', 'petugas_validasi', 'verifikator', 'penanggung_teknis', 'petugas_dokter']) ? 'active' : 'collapsed' ?>" data-bs-toggle="collapse" href="#collapseManajemen" role="button" aria-expanded="<?= in_array($this->uri->segment(2), ['petugas_sampel', 'petugas_verifikasi', 'petugas_validasi', 'verifikator', 'penanggung_teknis', 'petugas_dokter']) ? 'true' : 'false' ?>">
               <i class="nav-icon fas fa-cogs text-secondary"></i>
               <span>Manajemen Petugas</span>
               <i class="fas fa-chevron-down arrow-icon"></i>
             </a>
-            <div class="collapse" id="collapseManajemen" data-bs-parent="#sidebarMenu">
+            <div class="collapse <?= in_array($this->uri->segment(2), ['petugas_sampel', 'petugas_verifikasi', 'petugas_validasi', 'verifikator', 'penanggung_teknis', 'petugas_dokter']) ? 'show' : '' ?>" id="collapseManajemen" data-bs-parent="#sidebarMenu">
               <ul class="nav flex-column ms-3 mt-1">
-                <li class="nav-item"><a href="<?= site_url('klinik/petugas_sampel') ?>" class="nav-link"><i class="nav-icon far fa-circle" style="font-size: 0.5rem;"></i> Petugas Klinik</a></li>
-                <li class="nav-item"><a href="<?= site_url('klinik/petugas_verifikasi') ?>" class="nav-link"><i class="nav-icon far fa-circle" style="font-size: 0.5rem;"></i> Petugas Verifikasi</a></li>
-                <li class="nav-item"><a href= "<?= site_url('klinik/petugas_validasi') ?>" class="nav-link" ><i class="nav-icon far fa-circle" style="font-size: 0.5rem;"></i>Petugas Validasi</a></li>
-                <li class="nav-item"><a href="<?= site_url('klinik/verifikator') ?>" class="nav-link"><i class="nav-icon far fa-circle" style="font-size: 0.5rem;"></i> Petugas Verifikator Hasil</a></li>
-                <li class="nav-item"><a href="<?= site_url('klinik/penanggung_teknis') ?>" class="nav-link"><i class="nav-icon far fa-circle" style="font-size: 0.5rem;"></i> Petugas Penanggung Jawab</a></li>
-                <li class="nav-item"><a href="<?= site_url('klinik/petugas_dokter') ?>" class="nav-link"><i class="nav-icon far fa-circle" style="font-size: 0.5rem;"></i> Dokter Pemeriksa Rekam Medis</a></li>
+                <li class="nav-item"><a href="<?= site_url('klinik/petugas_sampel') ?>" class="nav-link <?= $this->uri->segment(2) == 'petugas_sampel' ? 'active' : '' ?>"><i class="nav-icon far fa-circle" style="font-size: 0.5rem;"></i> Petugas Klinik</a></li>
+                <li class="nav-item"><a href="<?= site_url('klinik/petugas_verifikasi') ?>" class="nav-link <?= $this->uri->segment(2) == 'petugas_verifikasi' ? 'active' : '' ?>"><i class="nav-icon far fa-circle" style="font-size: 0.5rem;"></i> Petugas Verifikasi</a></li>
+                <li class="nav-item"><a href= "<?= site_url('klinik/petugas_validasi') ?>" class="nav-link <?= $this->uri->segment(2) == 'petugas_validasi' ? 'active' : '' ?>" ><i class="nav-icon far fa-circle" style="font-size: 0.5rem;"></i>Petugas Validasi</a></li>
+                <li class="nav-item"><a href="<?= site_url('klinik/verifikator') ?>" class="nav-link <?= $this->uri->segment(2) == 'verifikator' ? 'active' : '' ?>"><i class="nav-icon far fa-circle" style="font-size: 0.5rem;"></i> Petugas Verifikator Hasil</a></li>
+                <li class="nav-item"><a href="<?= site_url('klinik/penanggung_teknis') ?>" class="nav-link <?= $this->uri->segment(2) == 'penanggung_teknis' ? 'active' : '' ?>"><i class="nav-icon far fa-circle" style="font-size: 0.5rem;"></i> Petugas Penanggung Jawab</a></li>
+                <li class="nav-item"><a href="<?= site_url('klinik/petugas_dokter') ?>" class="nav-link <?= $this->uri->segment(2) == 'petugas_dokter' ? 'active' : '' ?>"><i class="nav-icon far fa-circle" style="font-size: 0.5rem;"></i> Dokter Pemeriksa Rekam Medis</a></li>
               </ul>
             </div>
           </li>
