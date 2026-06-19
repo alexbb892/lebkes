@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Uji_rekam_klinik extends CI_Controller
+class Uji_rekam_klinik extends MY_KlinikController
 {
 
     public function __construct()

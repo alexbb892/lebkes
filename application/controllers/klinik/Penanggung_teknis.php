@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Penanggung_teknis extends CI_Controller {
+class Penanggung_teknis extends MY_KlinikController {
 
     public function __construct()
     {

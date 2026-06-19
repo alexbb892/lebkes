@@ -1,17 +1,17 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class User extends CI_Controller {
+class User extends MY_KlinikController {
 
     public function __construct() {
         parent::__construct();
         $this->load->model('klinik/User_model');
-        $this->load->helper(['url', 'form']);
-        $this->load->library('session');
+        $this->load->helper(['form']);
 
-        // Cek login dan role admin
-        if (!$this->session->userdata('logged_in') || $this->session->userdata('role') !== 'admin') {
-            redirect('klinik/auth/login');
+        // Check if user role is admin
+        if ($this->session->userdata('role') !== 'admin') {
+            $this->session->set_flashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            redirect('klinik/dashboard');
         }   
     }
 

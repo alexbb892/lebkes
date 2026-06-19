@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Petugas_validasi extends CI_Controller {
+class Petugas_validasi extends MY_KlinikController {
 
     public function __construct() {
         parent::__construct();

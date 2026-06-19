@@ -1,19 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller
+class Dashboard extends MY_KlinikController
 {
     public function __construct()
     {
         parent::__construct();
-        $this->load->helper('url');
-        $this->load->library('session');
         $this->load->database();
-
-        // Cek login
-        if ($this->session->userdata('logged_in') !== TRUE) {
-            redirect('auth/login');
-        }
     }
 
     public function index()
@@ -59,8 +52,8 @@ class Dashboard extends CI_Controller
         if (strtolower($this->session->userdata('role')) == 'petugas pendaftaran') {
             $this->load->view('klinik/dashboard_klinik/Dashboard_pendaftaran', $data);
         } elseif (strtolower($this->session->userdata('role')) == 'pemeriksa sampel') {
-            $this->load->model('Uji_klinik_model');
-            $this->load->model('Hasil_laporan_model');
+            $this->load->model('klinik/Uji_klinik_model');
+            $this->load->model('klinik/Hasil_laporan_model');
             $data['formulir'] = $this->Uji_klinik_model->get_today_formulir_belum_input();
             $data['hasil_lab_siap'] = count($this->Hasil_laporan_model->get_pasien_dengan_soap());
             $this->load->view('klinik/dashboard_klinik/Dashboard_klinik', $data);

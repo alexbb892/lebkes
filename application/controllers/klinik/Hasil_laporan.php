@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Hasil_laporan extends CI_Controller {
+class Hasil_laporan extends MY_KlinikController {
 
     public function __construct() {
         parent::__construct();

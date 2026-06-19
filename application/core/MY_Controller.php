@@ -76,3 +76,25 @@ class MY_Controller extends CI_Controller
         $this->load->view('layout/footer', $data);
     }
 }
+
+/**
+ * MY_KlinikController
+ * Base controller for all clinic controllers to enforce login authentication.
+ */
+class MY_KlinikController extends CI_Controller
+{
+    public function __construct()
+    {
+        parent::__construct();
+        
+        // Load required resources for authentication
+        $this->load->library('session');
+        $this->load->helper('url');
+        
+        // Enforce clinic user login verification
+        if ($this->session->userdata('logged_in') !== TRUE) {
+            redirect('klinik/petugas_klinik');
+            exit;
+        }
+    }
+}

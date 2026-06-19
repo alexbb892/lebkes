@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Form_permintaan_rm extends CI_Controller
+class Form_permintaan_rm extends MY_KlinikController
 {
 
     public function __construct()

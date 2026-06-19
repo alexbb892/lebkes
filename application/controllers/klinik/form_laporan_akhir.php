@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Form_laporan_akhir extends CI_Controller {
+class Form_laporan_akhir extends MY_KlinikController {
 
     public function __construct()
     {
