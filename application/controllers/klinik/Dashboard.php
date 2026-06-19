@@ -14,9 +14,11 @@ class Dashboard extends MY_KlinikController
         $data['title'] = 'Dashboard';
         $today = date('Y-m-d');
 
-        // Menggunakan UNION agar pasien yang terdata di Klinik dan RM pada hari yang sama hanya dihitung 1 kali[cite: 2, 5]
         $query = $this->db->query("
             SELECT COUNT(*) as total FROM (
+                SELECT nik FROM pasien 
+                WHERE DATE(created_at) = '$today' AND nik IS NOT NULL AND nik != ''
+                UNION
                 SELECT p.nik FROM form_permintaan_klinik f
                 JOIN pasien p ON f.id_pasien = p.id_pasien
                 WHERE DATE(f.tgl_form) = '$today' AND p.nik IS NOT NULL AND p.nik != ''
@@ -70,16 +72,18 @@ class Dashboard extends MY_KlinikController
     {
         $today = date('Y-m-d');
 
-        // Query untuk mendapatkan distribusi gender dari pasien unik hari ini
         $query = $this->db->query("
             SELECT gender, COUNT(*) as jumlah FROM (
+                SELECT gender, nik FROM pasien 
+                WHERE DATE(created_at) = '$today' AND gender IS NOT NULL AND gender != '' AND nik IS NOT NULL AND nik != ''
+                UNION
                 SELECT p.gender, p.nik FROM form_permintaan_klinik f
                 JOIN pasien p ON f.id_pasien = p.id_pasien
-                WHERE DATE(f.tgl_form) = '$today' AND p.gender IS NOT NULL AND p.gender != ''
+                WHERE DATE(f.tgl_form) = '$today' AND p.gender IS NOT NULL AND p.gender != '' AND p.nik IS NOT NULL AND p.nik != ''
                 UNION
                 SELECT p.gender, p.nik FROM kunjungan_rm k 
                 JOIN pasien p ON k.no_rm = p.no_rm 
-                WHERE DATE(k.tanggal_kunjungan) = '$today' AND p.gender IS NOT NULL AND p.gender != ''
+                WHERE DATE(k.tanggal_kunjungan) = '$today' AND p.gender IS NOT NULL AND p.gender != '' AND p.nik IS NOT NULL AND p.nik != ''
             ) as pasien_unik 
             GROUP BY gender
         ");

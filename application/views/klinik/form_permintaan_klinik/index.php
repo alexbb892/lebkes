@@ -79,22 +79,29 @@
                             <td><?= date('d-m-Y', strtotime($f->tgl_form)) ?></td>
 
                             <td>
-                                <a href="<?= site_url('klinik/form_permintaan_klinik/detail/' . $f->id) ?>"
-                                class="btn btn-sm btn-outline-primary me-1" title="Lihat">
-                                    <i class="fas fa-eye"></i>
-                                </a>
+                                <?php if (!empty($f->id)): ?>
+                                    <a href="<?= site_url('klinik/form_permintaan_klinik/detail/' . $f->id) ?>"
+                                    class="btn btn-sm btn-outline-primary me-1" title="Lihat">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
 
-                                <a href="<?= site_url('klinik/form_permintaan_klinik/edit/' . $f->id) ?>"
-                                class="btn btn-sm btn-outline-success me-1" title="Edit">
-                                    <i class="fas fa-pen"></i>
-                                </a>
+                                    <a href="<?= site_url('klinik/form_permintaan_klinik/edit/' . $f->id) ?>"
+                                    class="btn btn-sm btn-outline-success me-1" title="Edit">
+                                        <i class="fas fa-pen"></i>
+                                    </a>
 
-                                <a href="<?= site_url('klinik/form_permintaan_klinik/delete/' . $f->id) ?>"
-                                class="btn btn-sm btn-outline-danger"
-                                title="Hapus"
-                                onclick="return confirm('Yakin ingin menghapus data ini?')">
-                                    <i class="fas fa-trash"></i>
-                                </a>
+                                    <a href="<?= site_url('klinik/form_permintaan_klinik/delete/' . $f->id) ?>"
+                                    class="btn btn-sm btn-outline-danger"
+                                    title="Hapus"
+                                    onclick="return confirm('Yakin ingin menghapus data ini?')">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                <?php else: ?>
+                                    <a href="<?= site_url('klinik/form_permintaan_klinik/create?nik=' . $f->nik) ?>"
+                                    class="btn btn-sm btn-success d-inline-flex align-items-center" title="Buat Formulir Permintaan">
+                                        <i class="fas fa-plus me-1"></i> Buat Form
+                                    </a>
+                                <?php endif; ?>
                             </td>
                         </tr>
 

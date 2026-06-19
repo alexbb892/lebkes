@@ -72,6 +72,15 @@ class Form_permintaan_klinik extends MY_KlinikController {
                     $data['kunjungan_prefill'] = $kunjungan;
                 }
             }
+        } else {
+            $nik = $this->input->get('nik');
+            if ($nik) {
+                $this->load->model('klinik/Form_permintaan_rm_model');
+                $pasien = $this->Form_permintaan_rm_model->get_by_nik($nik);
+                if ($pasien) {
+                    $data['pasien_prefill'] = $pasien;
+                }
+            }
         }
 
         // Ambil data dari tabel pemeriksaan_detail melalui model (atau langsung DB)

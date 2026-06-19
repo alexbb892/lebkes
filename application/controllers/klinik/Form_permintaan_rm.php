@@ -79,7 +79,7 @@ class Form_permintaan_rm extends MY_KlinikController
             unset($data_simpan['no_rm']); // Jangan ubah no_rm lama
             unset($data_simpan['created_at']); // Pertahankan tanggal pendaftaran awal
             
-            $this->Form_permintaan_rm_model->update($existing_rm->id, $data_simpan);
+            $this->Form_permintaan_rm_model->update($existing_rm->id_pasien, $data_simpan);
             $this->session->set_flashdata('success', 'Pasien sudah terdaftar. Data pasien Rekam Medis berhasil diperbarui.');
         } else {
             // Insert data baru

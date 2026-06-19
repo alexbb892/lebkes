@@ -36,7 +36,7 @@
           </a>
         </li>
 
-        <?php if ($is_admin || $is_pendaftaran || $is_pemeriksa): ?>
+        <?php if ($is_admin || $is_pendaftaran || $is_pemeriksa || $is_rm): ?>
           <li class="nav-header">Klinik dan Rekam Medis</li>
           <li class="nav-item">
             <a class="nav-link <?= in_array($this->uri->segment(2), ['form_permintaan_klinik', 'uji_klinik', 'uji_rekam_klinik', 'laporan_uji_klinik']) ? 'active' : 'collapsed' ?>" data-bs-toggle="collapse" href="#collapseKlinik" role="button" aria-expanded="<?= in_array($this->uri->segment(2), ['form_permintaan_klinik', 'uji_klinik', 'uji_rekam_klinik', 'laporan_uji_klinik']) ? 'true' : 'false' ?>">

@@ -52,10 +52,24 @@ class Form_permintaan_klinik_model extends CI_Model {
     }
 
     public function get_today_formulir(){
-        $this->db->select('form_permintaan_klinik.*, pasien.nama_pasien, pasien.nik, pasien.gender, pasien.puskesmas_wilayah');
-        $this->db->from('form_permintaan_klinik');
-        $this->db->join('pasien', 'pasien.id_pasien = form_permintaan_klinik.id_pasien', 'left');
-        $this->db->where('DATE(form_permintaan_klinik.tgl_form)', date('Y-m-d'));
+        $today = date('Y-m-d');
+        $this->db->select("
+            form_permintaan_klinik.id,
+            COALESCE(form_permintaan_klinik.no_register, '-') as no_register,
+            pasien.nama_pasien,
+            pasien.nik,
+            pasien.gender,
+            pasien.id_pasien,
+            COALESCE(form_permintaan_klinik.nama_dokter, '-') as nama_dokter,
+            COALESCE(form_permintaan_klinik.tgl_form, pasien.created_at) as tgl_form,
+            COALESCE(form_permintaan_klinik.kelayakan, 'Belum Diperiksa') as kelayakan
+        ", FALSE);
+        $this->db->from('pasien');
+        $this->db->join('form_permintaan_klinik', "pasien.id_pasien = form_permintaan_klinik.id_pasien AND DATE(form_permintaan_klinik.tgl_form) = '$today'", 'left');
+        $this->db->group_start();
+        $this->db->where('DATE(pasien.created_at)', $today);
+        $this->db->or_where('DATE(form_permintaan_klinik.tgl_form)', $today);
+        $this->db->group_end();
         return $this->db->get()->result();
     }
 

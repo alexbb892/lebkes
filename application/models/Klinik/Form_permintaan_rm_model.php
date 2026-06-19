@@ -32,9 +32,13 @@ class Form_permintaan_rm_model extends CI_Model
         return $this->db->query($sql, [$today, $today, $today, $today])->result();
     }
 
-    public function get_by_nik($id_pasien)
+    public function get_by_nik($nik_or_id)
     {
-        return $this->db->get_where($this->table, ['id_pasien' => $id_pasien])->row();
+        // Detect if the parameter is a numeric auto-increment ID or a NIK string
+        if (is_numeric($nik_or_id) && strlen($nik_or_id) < 10) {
+            return $this->db->get_where($this->table, ['id_pasien' => $nik_or_id])->row();
+        }
+        return $this->db->get_where($this->table, ['nik' => $nik_or_id])->row();
     }
 
     public function get_by_no_rm($no_rm)
@@ -53,15 +57,23 @@ class Form_permintaan_rm_model extends CI_Model
         return $this->db->insert_id();
     }
 
-    public function update($id, $data)
+    public function update($nik_or_id, $data)
     {
-        $this->db->where('nik', $id);
+        if (is_numeric($nik_or_id) && strlen($nik_or_id) < 10) {
+            $this->db->where('id_pasien', $nik_or_id);
+        } else {
+            $this->db->where('nik', $nik_or_id);
+        }
         $this->db->update($this->table, $data);
     }
 
-    public function delete($id)
+    public function delete($nik_or_id)
     {
-        $this->db->where('nik', $id);
+        if (is_numeric($nik_or_id) && strlen($nik_or_id) < 10) {
+            $this->db->where('id_pasien', $nik_or_id);
+        } else {
+            $this->db->where('nik', $nik_or_id);
+        }
         $this->db->delete($this->table);
     }
 
