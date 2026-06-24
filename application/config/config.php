@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 |-------------------------------------------------------------------
@@ -7,12 +7,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |-------------------------------------------------------------------
 | Dinamis (localhost atau IP) supaya bisa diakses via wifi yang sama.
 */
-$config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https' : 'http')
-    .'://'.$_SERVER['HTTP_HOST']
-    .str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
+
+$root = "http://" . $_SERVER['HTTP_HOST'];
+$root .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
+
+// Jika diakses lewat Cloudflare (HTTPS)
+if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+    $root = "https://" . $_SERVER['HTTP_HOST'];
+    $root .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
+}
+
+$config['base_url'] = $root;
+// $config['base_url'] = ((isset($_SERVER['HTTP']) && $_SERVER['HTTPS'] == 'on') ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
+
+//$config['base_url'] = 'https://' . $_SERVER['HTTP_HOST'] . str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
 
 $config['index_page'] = '';
-$config['uri_protocol']	= 'REQUEST_URI';
+$config['uri_protocol']    = 'REQUEST_URI';
 
 $config['encryption_key'] = 'kesmasnew_change_me_123';
 
@@ -33,11 +44,11 @@ $config['sess_regenerate_destroy'] = FALSE;
 | Cookie Related Variables
 |-------------------------------------------------------------------
 */
-$config['cookie_prefix']	= '';
-$config['cookie_domain']	= '';
-$config['cookie_path']		= '/';      // <-- penting: jangan /kesmas_new/
-$config['cookie_secure']	= FALSE;
-$config['cookie_httponly'] 	= TRUE;
+$config['cookie_prefix']    = '';
+$config['cookie_domain']    = '';
+$config['cookie_path']        = '/';      // <-- penting: jangan /kesmas_new/
+$config['cookie_secure']    = FALSE;
+$config['cookie_httponly']     = TRUE;
 
 /*
 |-------------------------------------------------------------------
